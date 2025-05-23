@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .btn {
+    @apply flex items-center justify-center gap-2 w-full py-4 px-4 rounded-md text-base font-medium cursor-pointer text-center mb-4 transition-all duration-300;
+  }
+
+  .btn-primary {
+    @apply bg-gradient-to-r from-primary to-primary-dark text-white hover:from-primary-dark hover:to-primary hover:shadow-md hover:shadow-primary/30 hover:-translate-y-0.5;
+  }
+
+  .btn-secondary {
+    @apply bg-primary-light text-primary hover:bg-opacity-80 hover:shadow-sm;
+  }
+
+  .btn-outline {
+    @apply bg-transparent border border-primary text-primary hover:bg-primary/5;
+  }
+
+  .form-control {
+    @apply w-full py-3 px-4 border border-gray-300 rounded-md text-base transition-all duration-300 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10;
+  }
+
+  .form-label {
+    @apply block mb-2 text-sm text-primary font-medium;
+  }
+
+  .card {
+    @apply bg-white rounded-md shadow-md w-full relative;
+  }
+}
+
+/* Animations */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
