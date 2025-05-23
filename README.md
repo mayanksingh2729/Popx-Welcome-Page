@@ -2,7 +2,7 @@
 
 PopX is a full-stack MERN (MongoDB, Express, React, Node.js) application that provides user authentication and profile management functionality. Users can sign up, log in, and manage their profiles with features like bio editing and profile image uploads.
 
-![PopX Screenshot](https://via.placeholder.com/800x400?text=PopX+Screenshot)
+![PopX Screenshot](![alt text](image.png))
 
 ## Features
 
@@ -45,27 +45,6 @@ PopX is a full-stack MERN (MongoDB, Express, React, Node.js) application that pr
 - Bcrypt for password hashing
 - Multer for file uploads
 
-## Project Structure
-
-\`\`\`
-popx/
-├── client/                 # React frontend
-│   ├── public/             # Public assets
-│   └── src/
-│       ├── components/     # Reusable components
-│       ├── context/        # Context API
-│       ├── pages/          # Page components
-│       └── styles/         # CSS styles
-│
-├── server/                 # Node.js backend
-│   ├── middleware/         # Express middleware
-│   ├── models/             # Mongoose models
-│   ├── routes/             # API routes
-│   ├── uploads/            # Uploaded files
-│   └── utils/              # Utility functions
-│
-└── vercel.json             # Vercel deployment config
-\`\`\`
 
 ## Installation & Setup
 
@@ -116,105 +95,3 @@ NODE_ENV=development
    \`\`\`
 
 6. Open your browser and navigate to `http://localhost:3000`
-
-## API Endpoints
-
-### Authentication
-- `POST /api/auth/login` - User login
-- `GET /api/auth/user` - Get current user
-- `POST /api/auth/validate-token` - Validate JWT token
-
-### User Management
-- `POST /api/users/register` - Register new user
-- `GET /api/users/me` - Get current user profile
-- `PUT /api/users/profile` - Update user profile
-- `POST /api/users/profile/image` - Upload profile image
-
-## Deployment
-
-### Deploying to Vercel
-
-1. Push your code to a GitHub repository
-2. Log in to your Vercel account
-3. Click "New Project" and import your GitHub repository
-4. Set up the environment variables:
-   - `MONGO_URI`: Your MongoDB Atlas connection string
-   - `JWT_SECRET`: A secure random string for JWT signing
-5. Click "Deploy"
-
-### MongoDB Atlas Setup
-
-1. Create a MongoDB Atlas account
-2. Create a new cluster
-3. Set up database access (create a user and password)
-4. Get your connection string and add it to your environment variables
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Acknowledgments
-
-- [React](https://reactjs.org/)
-- [Node.js](https://nodejs.org/)
-- [Express](https://expressjs.com/)
-- [MongoDB](https://www.mongodb.com/)
-- [Mongoose](https://mongoosejs.com/)
-- [JWT](https://jwt.io/)
-\`\`\`
-
-Let's also create a simple `.gitignore` file:
-
-```text file=".gitignore"
-# Dependencies
-node_modules/
-/.pnp
-.pnp.js
-
-# Testing
-/coverage
-
-# Production
-/client/build
-
-# Environment variables
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# Logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Editor directories and files
-.idea/
-.vscode/
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
-# Uploaded files
-/server/uploads/*
-!/server/uploads/.gitkeep
