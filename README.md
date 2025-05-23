@@ -66,7 +66,7 @@ NODE_ENV=development
 
 1. Clone the repository
    \`\`\`bash
-   git clone https://github.com/yourusername/popx.git
+   git clone
    cd popx
    \`\`\`
 
