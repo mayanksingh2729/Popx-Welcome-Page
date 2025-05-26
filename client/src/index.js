@@ -5,7 +5,7 @@ import App from "./App"
 import "./App.css"
 
 // Set base URL for axios
-axios.defaults.baseURL = process.env.NODE_ENV === "production" ? "/api" : "http://localhost:5000"
+axios.defaults.baseURL = process.env.NODE_ENV === "production" ? "/api" : "https://popx-welcome-page-1.onrender.com"
 
 const root = ReactDOM.createRoot(document.getElementById("root"))
 root.render(
