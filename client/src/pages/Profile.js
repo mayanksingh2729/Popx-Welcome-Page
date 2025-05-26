@@ -124,7 +124,7 @@ const Profile = () => {
     }
 
     // If it's a relative path, construct the full URL
-    const baseUrl = process.env.NODE_ENV === "production" ? window.location.origin : "http://localhost:5000"
+    const baseUrl = process.env.NODE_ENV === "production" ? window.location.origin : "https://popx-welcome-page-1.onrender.com"
 
     return `${baseUrl}${profileImage}`
   }
