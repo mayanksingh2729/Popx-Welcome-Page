@@ -106,16 +106,25 @@ export const AuthProvider = ({ children }) => {
   // Update profile image
   const updateProfileImage = async (formData) => {
     try {
+      console.log("Uploading image...") // Debug log
+
       const response = await axios.post("/api/users/profile/image", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       })
 
-      // Update the user state with the new profile image
-      setUser({ ...user, profileImage: response.data.profileImage })
+      console.log("Upload response:", response.data) // Debug log
+
+      // Update the user state with the complete updated user object
+      if (response.data.user) {
+        setUser(response.data.user)
+        console.log("User state updated:", response.data.user) // Debug log
+      }
+
       return true
     } catch (err) {
+      console.error("Upload error:", err)
       setError(err.response?.data?.message || "Failed to update profile image")
       return false
     }

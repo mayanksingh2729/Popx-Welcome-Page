@@ -1,6 +1,23 @@
 "use client"
 
 const SideMenu = ({ isOpen, onClose, user, onLogout }) => {
+  // Construct the full image URL
+  const getImageUrl = (profileImage) => {
+    if (!profileImage) {
+      return "https://img.icons8.com/?size=100&id=97613&format=png&color=000000"
+    }
+
+    // If it's already a full URL (like the default icon), return as is
+    if (profileImage.startsWith("http")) {
+      return profileImage
+    }
+
+    // If it's a relative path, construct the full URL
+    const baseUrl = process.env.NODE_ENV === "production" ? window.location.origin : "http://localhost:5000"
+
+    return `${baseUrl}${profileImage}`
+  }
+
   return (
     <>
       <div className={`menu-overlay ${isOpen ? "active" : ""}`} onClick={onClose}></div>
@@ -27,7 +44,7 @@ const SideMenu = ({ isOpen, onClose, user, onLogout }) => {
         <div className="side-menu-content">
           <div className="menu-profile">
             <img
-              src={user?.profileImage || "https://img.icons8.com/?size=100&id=97613&format=png&color=000000"}
+              src={getImageUrl(user?.profileImage) || "/placeholder.svg"}
               alt="Profile Picture"
               onError={(e) => {
                 e.target.onerror = null

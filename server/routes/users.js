@@ -183,14 +183,14 @@ router.post("/profile/image", auth, upload.single("profileImage"), async (req, r
       return res.status(400).json({ message: "No file uploaded" })
     }
 
-    // Create the full URL for the image
-    // In development, use localhost, in production use the actual domain
-    const baseUrl =
-      process.env.NODE_ENV === "production"
-        ? `https://${req.get("host")}`
-        : `http://localhost:${process.env.PORT || 5000}`
+    console.log("File uploaded:", req.file) // Debug log
 
-    const profileImage = `${baseUrl}/${req.file.path.replace(/\\/g, "/")}`
+    // Create the correct URL path for the uploaded image
+    // The file is saved in server/uploads/profile/filename.jpg
+    // But we serve it from /uploads/profile/filename.jpg
+    const profileImage = `/uploads/profile/${req.file.filename}`
+
+    console.log("Profile image URL:", profileImage) // Debug log
 
     // Find and update user
     const user = await User.findByIdAndUpdate(req.user.id, { profileImage }, { new: true }).select("-password")
@@ -199,12 +199,14 @@ router.post("/profile/image", auth, upload.single("profileImage"), async (req, r
       return res.status(404).json({ message: "User not found" })
     }
 
+    console.log("Updated user:", user) // Debug log
+
     res.json({
-      profileImage,
+      profileImage: user.profileImage,
       user,
     })
   } catch (err) {
-    console.error(err)
+    console.error("Error uploading image:", err)
     res.status(500).json({ message: "Server error" })
   }
 })

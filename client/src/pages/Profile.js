@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { useAuth } from "../context/AuthContext"
 import Toast from "../components/Toast"
 import SideMenu from "../components/SideMenu"
@@ -13,6 +13,13 @@ const Profile = () => {
   const [isUploading, setIsUploading] = useState(false)
 
   const fileInputRef = useRef(null)
+
+  // Update bio when user changes
+  useEffect(() => {
+    if (user?.bio) {
+      setBio(user.bio)
+    }
+  }, [user])
 
   const handleLogout = () => {
     logout()
@@ -71,6 +78,8 @@ const Profile = () => {
       const formData = new FormData()
       formData.append("profileImage", file)
 
+      console.log("Starting image upload...") // Debug log
+
       const success = await updateProfileImage(formData)
 
       if (success) {
@@ -79,6 +88,7 @@ const Profile = () => {
           message: "Profile image updated successfully!",
           type: "success",
         })
+        console.log("Image upload successful") // Debug log
       } else {
         setToast({
           show: true,
@@ -95,8 +105,32 @@ const Profile = () => {
       })
     } finally {
       setIsUploading(false)
+      // Clear the file input
+      if (fileInputRef.current) {
+        fileInputRef.current.value = ""
+      }
     }
   }
+
+  // Construct the full image URL
+  const getImageUrl = (profileImage) => {
+    if (!profileImage) {
+      return "https://img.icons8.com/?size=100&id=97613&format=png&color=000000"
+    }
+
+    // If it's already a full URL (like the default icon), return as is
+    if (profileImage.startsWith("http")) {
+      return profileImage
+    }
+
+    // If it's a relative path, construct the full URL
+    const baseUrl = process.env.NODE_ENV === "production" ? window.location.origin : "http://localhost:5000"
+
+    return `${baseUrl}${profileImage}`
+  }
+
+  console.log("Current user:", user) // Debug log
+  console.log("Profile image URL:", getImageUrl(user?.profileImage)) // Debug log
 
   return (
     <div className="app-container">
@@ -153,11 +187,15 @@ const Profile = () => {
               ) : (
                 <img
                   id="profile-image"
-                  src={user?.profileImage || "https://img.icons8.com/?size=100&id=97613&format=png&color=000000"}
+                  src={getImageUrl(user?.profileImage) || "/placeholder.svg"}
                   alt="Profile Picture"
                   onError={(e) => {
+                    console.log("Image failed to load:", e.target.src) // Debug log
                     e.target.onerror = null
                     e.target.src = "https://img.icons8.com/?size=100&id=97613&format=png&color=000000"
+                  }}
+                  onLoad={() => {
+                    console.log("Image loaded successfully:", getImageUrl(user?.profileImage)) // Debug log
                   }}
                 />
               )}

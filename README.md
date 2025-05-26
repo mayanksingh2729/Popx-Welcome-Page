@@ -48,11 +48,6 @@ PopX is a full-stack MERN (MongoDB, Express, React, Node.js) application that pr
 
 ## Installation & Setup
 
-### Prerequisites
-- Node.js (v14 or later)
-- MongoDB (local or Atlas)
-- npm or yarn
-
 ### Environment Variables
 Create a `.env` file in the server directory with the following variables:
 \`\`\`
